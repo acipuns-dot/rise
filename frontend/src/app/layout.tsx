@@ -1,6 +1,6 @@
 "use client";
 
-import { Geist, Geist_Mono } from "next/font/google";
+import { Outfit, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import {
   Home,
@@ -13,13 +13,13 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { UserProvider } from "@/context/UserContext";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const primaryFont = Outfit({
+  variable: "--font-primary",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const monoFont = Space_Grotesk({
+  variable: "--font-mono",
   subsets: ["latin"],
 });
 
@@ -37,7 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark no-scrollbar">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground overflow-hidden selection:bg-electric-cyan selection:text-black`}
+        className={`${primaryFont.variable} ${monoFont.variable} antialiased bg-background text-foreground overflow-hidden selection:bg-electric-cyan selection:text-black font-sans`}
       >
         <UserProvider>
           <main className="relative h-[100dvh] w-full max-w-md mx-auto overflow-hidden flex flex-col pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]">

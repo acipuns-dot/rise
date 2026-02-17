@@ -73,8 +73,8 @@ export default function Dashboard() {
       {/* Header */}
       <header className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-white italic">
-            RISE<span className="text-electric-cyan text-sm align-top leading-none ml-1">v1.1</span>
+          <h1 className="text-3xl font-black tracking-tighter text-white italic font-mono">
+            RISE<span className="text-electric-cyan text-sm align-top leading-none ml-1 font-sans not-italic">v1.1</span>
           </h1>
           <p className="text-muted-foreground text-xs mt-1 font-medium tracking-widest uppercase">
             {isMounted ? new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' }) : "Loading..."}

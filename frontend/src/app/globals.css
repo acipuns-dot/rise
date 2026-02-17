@@ -3,14 +3,17 @@
 @theme {
   --color-background: #09090b;
   --color-foreground: #fafafa;
-  
+
   --color-midnight-charcoal: #0f1115;
   --color-midnight-navy: #161b22;
   --color-electric-cyan: #00f5ff;
   --color-glow-blue: #00a3ff;
-  
+
   --color-glass-white: rgba(255, 255, 255, 0.05);
   --color-glass-border: rgba(255, 255, 255, 0.1);
+
+  --font-sans: var(--font-primary);
+  --font-mono: var(--font-mono);
 }
 
 :root {
@@ -54,11 +57,9 @@ body {
 }
 
 .glass-card {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.05) 0%,
-    rgba(255, 255, 255, 0.01) 100%
-  );
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.05) 0%,
+      rgba(255, 255, 255, 0.01) 100%);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -72,6 +73,8 @@ body {
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .no-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
