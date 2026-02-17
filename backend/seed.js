@@ -46,10 +46,32 @@ async function seed() {
                 });
                 const listData = await listRes.json();
 
+                if (!listData.items) {
+                    console.error(`  ❌ Collection "exercises" not found. did you import collections.json?`);
+                    console.error('  Response:', JSON.stringify(listData));
+                    return;
+                }
+
                 let exerciseId;
+                const exerciseBody = {
+                    name: ex.name,
+                    target_muscle: ex.target,
+                    demo_video: ex.video,
+                    cues: ex.cues,
+                    tempo: ex.tempo
+                };
+
                 if (listData.items.length > 0) {
                     exerciseId = listData.items[0].id;
-                    console.log(`  - Exercise "${ex.name}" already exists.`);
+                    await fetch(`${PB_URL}/api/collections/exercises/records/${exerciseId}`, {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': token
+                        },
+                        body: JSON.stringify(exerciseBody)
+                    });
+                    console.log(`  ↻ Updated exercise: ${ex.name}`);
                 } else {
                     const createRes = await fetch(`${PB_URL}/api/collections/exercises/records`, {
                         method: 'POST',
@@ -57,13 +79,7 @@ async function seed() {
                             'Content-Type': 'application/json',
                             'Authorization': token
                         },
-                        body: JSON.stringify({
-                            name: ex.name,
-                            target_muscle: ex.target,
-                            demo_video: ex.video,
-                            cues: ex.cues,
-                            tempo: ex.tempo
-                        })
+                        body: JSON.stringify(exerciseBody)
                     });
                     const createdNode = await createRes.json();
                     exerciseId = createdNode.id;

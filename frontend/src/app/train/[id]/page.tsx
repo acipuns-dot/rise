@@ -14,12 +14,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import TutorialModal from "@/components/TutorialModal";
+import pb from "@/lib/pocketbase";
 
 export default function WorkoutSession() {
     const params = useParams();
     const router = useRouter();
 
     // State for the walkthrough
+    const [workoutData, setWorkoutData] = useState<any>(null);
     const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
     const [currentSet, setCurrentSet] = useState(1);
     const [isResting, setIsResting] = useState(false);
@@ -27,33 +29,61 @@ export default function WorkoutSession() {
     const [tempoState, setTempoState] = useState<"down" | "pause" | "up" | "wait">("wait");
     const [tempoCount, setTempoCount] = useState(0);
     const [isTutorialOpen, setIsTutorialOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
-    // ... (workoutData remains the same for now)
-    const workoutData = {
-        title: "Foundational Push",
-        exercises: [
-            {
-                id: "1",
-                name: "Incline Push-ups",
-                target: "Upper Chest & Shoulders",
-                sets: 3,
-                reps: "10-12",
-                tempo: "3-1-1",
-                instructions: "Hands on a bed or chair. Keep body straight. Lower chest slowly. Pause briefly. Push back up.",
-                video: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJndzR4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKMGpxP5O5D6hFe/giphy.gif"
-            },
-            {
-                id: "2",
-                name: "Doorway Rows",
-                target: "Back & Rear Delts",
-                sets: 3,
-                reps: "12-15",
-                tempo: "2-1-1",
-                instructions: "Stand in doorway. Lean back. Pull yourself forward using back muscles.",
-                video: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJndzR4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/vWku8YNwyy5FTgop9B/giphy.gif"
+    // Fetch Workout Logic
+    useEffect(() => {
+        async function fetchWorkout() {
+            try {
+                const record = await pb.collection('workouts').getOne(params.id as string, {
+                    expand: 'exercises',
+                });
+
+                const formattedData = {
+                    title: record.name,
+                    exercises: record.expand?.exercises?.map((ex: any) => ({
+                        id: ex.id,
+                        name: ex.name,
+                        target: ex.target_muscle || "Full Body",
+                        sets: 3, // Default for now
+                        reps: "10-12", // Default for now
+                        tempo: ex.tempo || "3-1-1",
+                        instructions: Array.isArray(ex.cues) ? ex.cues.join(". ") : (ex.cues || "Follow the demo carefully."),
+                        video: ex.demo_video || "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJndzR4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKMGpxP5O5D6hFe/giphy.gif"
+                    })) || []
+                };
+
+                setWorkoutData(formattedData);
+            } catch (err) {
+                console.error("Failed to load workout session:", err);
+            } finally {
+                setIsLoading(false);
             }
-        ]
-    };
+        }
+
+        if (params.id) {
+            fetchWorkout();
+        }
+    }, [params.id]);
+
+    if (isLoading) {
+        return (
+            <div className="h-full flex items-center justify-center">
+                <div className="w-10 h-10 border-4 border-electric-cyan border-t-transparent rounded-full animate-spin" />
+            </div>
+        );
+    }
+
+    if (!workoutData || workoutData.exercises.length === 0) {
+        return (
+            <div className="h-full flex flex-col items-center justify-center p-8 text-center">
+                <h2 className="text-2xl font-black text-white italic uppercase mb-4">Workout Not Found</h2>
+                <Link href="/train" className="px-8 py-4 bg-white text-black font-bold rounded-2xl">
+                    BACK TO TRAIN
+                </Link>
+            </div>
+        );
+    }
 
     const currentExercise = workoutData.exercises[currentExerciseIndex];
 

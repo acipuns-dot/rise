@@ -12,22 +12,47 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useUser } from "@/context/UserContext";
 import { calculateWaterGoal } from "@/lib/weather";
+import pb from "@/lib/pocketbase";
 
 export default function Dashboard() {
   const { ramadanMode, setRamadanMode, weight, proteinGoal, proteinCurrent, waterCurrent } = useUser();
   const [timeLeft, setTimeLeft] = useState("");
   const [nextEvent, setNextEvent] = useState<"Suhoor" | "Iftar">("Suhoor");
   const [isMounted, setIsMounted] = useState(false);
+  const [workout, setWorkout] = useState<any>(null);
+  const router = useRouter();
 
   // Dynamic Water Goal
   const waterGoal = calculateWaterGoal(weight, false, ramadanMode);
 
-  // Handle mounting status
+  // Auth Guard & Data Fetching
   useEffect(() => {
     setIsMounted(true);
-  }, []);
+
+    // Check authentication
+    if (!pb.authStore.isValid) {
+      router.replace("/login");
+      return;
+    }
+
+    // Fetch next workout
+    async function fetchWorkout() {
+      try {
+        const records = await pb.collection('workouts').getList(1, 1, {
+          sort: '-created',
+        });
+        if (records.items.length > 0) {
+          setWorkout(records.items[0]);
+        }
+      } catch (err) {
+        console.error("Failed to fetch workout:", err);
+      }
+    }
+    fetchWorkout();
+  }, [router]);
 
   // Ramadan Countdown Logic
   useEffect(() => {
@@ -200,7 +225,7 @@ export default function Dashboard() {
         <div className="flex justify-between items-start mb-4">
           <div>
             <p className="text-electric-cyan text-[10px] font-black uppercase tracking-[0.2em]">Next Selection</p>
-            <h3 className="text-xl font-bold text-white mt-1">Foundational Push</h3>
+            <h3 className="text-xl font-bold text-white mt-1">{workout?.name || "Foundational Push"}</h3>
           </div>
           <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/5">
             <Trophy className="w-5 h-5 text-yellow-500" />
@@ -218,7 +243,7 @@ export default function Dashboard() {
           <p className="text-xs text-muted-foreground font-medium italic">Join 228 others today</p>
         </div>
 
-        <Link href="/train/foundational-push" className="w-full h-14 bg-electric-cyan text-black font-black rounded-2xl flex items-center justify-center gap-2 group-hover:bg-[#00e1ff] transition-all shadow-[0_4px_20px_rgba(0,245,255,0.3)]">
+        <Link href={`/train/${workout?.id || "foundational-push"}`} className="w-full h-14 bg-electric-cyan text-black font-black rounded-2xl flex items-center justify-center gap-2 group-hover:bg-[#00e1ff] transition-all shadow-[0_4px_20px_rgba(0,245,255,0.3)]">
           <Play className="w-5 h-5 fill-black" />
           <span>START SESSION</span>
         </Link>
@@ -232,7 +257,7 @@ export default function Dashboard() {
         </div>
         <div className="glass-card p-4 flex flex-col gap-2">
           <p className="text-[10px] font-bold text-muted-foreground uppercase">Body Mass</p>
-          <p className="text-lg font-black text-white italic">73.0 <span className="text-xs not-italic text-muted-foreground">kg</span></p>
+          <p className="text-lg font-black text-white italic">{weight.toFixed(1)} <span className="text-xs not-italic text-muted-foreground">kg</span></p>
         </div>
       </div>
     </div>

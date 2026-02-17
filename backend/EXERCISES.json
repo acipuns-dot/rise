@@ -2,7 +2,7 @@
     {
         "id": "foundational-push",
         "name": "Foundational Push",
-        "description": "Building the core pushing strength and chest definition.",
+        "description": "Building core pushing strength and chest definition.",
         "exercises": [
             {
                 "name": "Incline Push-ups",
@@ -17,7 +17,7 @@
                     "Pause for 1 second at the bottom",
                     "Explode up in 1 second"
                 ],
-                "video": "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJndzR4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKMGpxP5O5D6hFe/giphy.gif"
+                "video": "https://media.giphy.com/media/l41lS073r2P00VxhS/giphy.gif"
             },
             {
                 "name": "Doorway Rows",
@@ -32,7 +32,7 @@
                     "Squeeze shoulder blades for 1 second",
                     "Control the descent for 2 seconds"
                 ],
-                "video": "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJndzR4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/vWku8YNwyy5FTgop9B/giphy.gif"
+                "video": "https://media.giphy.com/media/vWku8YNwyy5FTgop9B/giphy.gif"
             },
             {
                 "name": "Pike Push-ups",
@@ -46,7 +46,28 @@
                     "Look back at your feet to keep neck neutral",
                     "Push back up to the start position"
                 ],
-                "video": "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJndzR4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKVUn7iM8FMEU24/giphy.gif"
+                "video": "https://upload.wikimedia.org/wikipedia/commons/e/e6/Pike_Push_Ups.gif"
+            }
+        ]
+    },
+    {
+        "id": "foundational-pull",
+        "name": "Foundational Pull",
+        "description": "Building the V-Taper back and pulling power.",
+        "exercises": [
+            {
+                "name": "Table Rows",
+                "target": "Middle Back & Lats",
+                "sets": 3,
+                "reps": "8-10",
+                "tempo": "2-1-2",
+                "cues": [
+                    "Lie under a sturdy table, grab the edge",
+                    "Pull your chest toward the table",
+                    "Keep your body straight like a plank",
+                    "Focus on squeezing the shoulder blades"
+                ],
+                "video": "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJndzR4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/vWku8YNwyy5FTgop9B/giphy.gif"
             }
         ]
     },
@@ -67,7 +88,70 @@
                     "Hold the bottom position for 2 full seconds",
                     "Drive through heels to stand up"
                 ],
-                "video": "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJndzR4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKMGpxP5O5D6hFe/giphy.gif"
+                "video": "https://media.giphy.com/media/l3q2t2KAcyuM9F2ko/giphy.gif"
+            },
+            {
+                "name": "Reverse Lunges",
+                "target": "Thighs & Glute Lift",
+                "sets": 3,
+                "reps": "12 per leg",
+                "tempo": "2-1-1",
+                "cues": [
+                    "Step back with one foot",
+                    "Drop the back knee toward the floor",
+                    "Keep front knee behind toes",
+                    "Drive through front heel to return"
+                ],
+                "video": "https://media.giphy.com/media/l0HlU0F0Lz2xV7S6k/giphy.gif"
+            },
+            {
+                "name": "Bulgarian Split Squats",
+                "target": "Inner Thigh & Glute Focus",
+                "sets": 3,
+                "reps": "8-10 per leg",
+                "tempo": "3-1-1",
+                "cues": [
+                    "Rest back foot on a chair or bed",
+                    "Sink deep until back knee nearly touches floor",
+                    "Keep chest up and core engaged",
+                    "Drive back up with front leg only"
+                ],
+                "video": "https://media.giphy.com/media/3o7TKVvLGlp1Mv1Txe/giphy.gif"
+            }
+        ]
+    },
+    {
+        "id": "core-stability",
+        "name": "Core Stability",
+        "description": "Building a rock-solid midsection.",
+        "exercises": [
+            {
+                "name": "High Plank",
+                "target": "Core & Shoulders",
+                "sets": 3,
+                "reps": "45s",
+                "tempo": "HOLD",
+                "cues": [
+                    "Push-up position, hands under shoulders",
+                    "Squeeze glutes and belly button to spine",
+                    "Don't let your lower back sag",
+                    "Breathe steadily throughout"
+                ],
+                "video": "https://media.giphy.com/media/l3vR16pONZYq7MC76/giphy.gif"
+            },
+            {
+                "name": "Plank Walk-outs",
+                "target": "Lower Abs & stability",
+                "sets": 3,
+                "reps": "8-10",
+                "tempo": "2-1-2",
+                "cues": [
+                    "From plank, walk hands forward",
+                    "Go as far as you can without arching back",
+                    "Hold briefly, then walk back to start",
+                    "Keep core rock solid"
+                ],
+                "video": "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJndzR4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKOCXvW9JvG0P72/giphy.gif"
             }
         ]
     }

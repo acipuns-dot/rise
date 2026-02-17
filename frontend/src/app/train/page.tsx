@@ -6,17 +6,33 @@ import {
     ChevronRight,
     ArrowUpRight,
     TrendingUp,
-    CircleCheck
+    CircleCheck,
+    Loader2
 } from "lucide-react";
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import pb from "@/lib/pocketbase";
 
 export default function Training() {
     const currentWeek = 1;
+    const [workouts, setWorkouts] = useState<any[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
 
-    const workouts = [
-        { title: "Foundational Push", type: "Upper Body", completed: true },
-        { title: "Foundational Pull", type: "Upper Body", current: true },
-        { title: "Lower Body Tone", type: "Thigh Sculpt" },
-    ];
+    useEffect(() => {
+        async function fetchWorkouts() {
+            try {
+                const records = await pb.collection('workouts').getFullList({
+                    sort: '-created',
+                });
+                setWorkouts(records);
+            } catch (err) {
+                console.error("Failed to fetch library:", err);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+        fetchWorkouts();
+    }, []);
 
     return (
         <div className="flex flex-col gap-6 pb-20">
@@ -49,28 +65,43 @@ export default function Training() {
 
             {/* Workout List */}
             <div className="flex flex-col gap-3">
-                <h3 className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em] ml-2">Current Routine</h3>
-                {workouts.map((w, idx) => (
-                    <div
-                        key={idx}
-                        className={`glass-card p-4 flex items-center justify-between border-l-4 transition-all ${w.current ? 'border-l-electric-cyan bg-white/[0.03]' : w.completed ? 'border-l-green-500' : 'border-l-transparent opacity-60'}`}
-                    >
-                        <div className="flex items-center gap-4">
-                            <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${w.current ? 'bg-electric-cyan/10' : 'bg-white/5'}`}>
-                                {w.completed ? <CircleCheck className="w-5 h-5 text-green-500" /> : <Dumbbell className={`w-5 h-5 ${w.current ? 'text-electric-cyan' : 'text-zinc-500'}`} />}
-                            </div>
-                            <div>
-                                <p className="text-sm font-bold text-white">{w.title}</p>
-                                <p className="text-[10px] text-muted-foreground uppercase font-bold tracking-tighter">{w.type}</p>
-                            </div>
-                        </div>
-                        {w.current && (
-                            <button className="px-4 py-2 bg-white text-black text-[10px] font-black rounded-lg uppercase tracking-tight">
-                                Start
-                            </button>
-                        )}
+                <h3 className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.2em] ml-2">Protocol Library</h3>
+
+                {isLoading ? (
+                    <div className="flex flex-col items-center justify-center p-12 gap-4">
+                        <Loader2 className="w-8 h-8 text-electric-cyan animate-spin" />
+                        <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest text-center italic">
+                            Synchronizing Muscle-Recom Library...
+                        </p>
                     </div>
-                ))}
+                ) : workouts.length === 0 ? (
+                    <div className="glass-card p-8 text-center">
+                        <p className="text-zinc-500 text-sm">No workouts found. Run seed script.</p>
+                    </div>
+                ) : (
+                    workouts.map((w, idx) => (
+                        <div
+                            key={w.id}
+                            className={`glass-card p-4 flex items-center justify-between border-l-4 transition-all ${idx === 0 ? 'border-l-electric-cyan bg-white/[0.03]' : 'border-l-transparent opacity-60 hover:opacity-100 hover:bg-white/[0.02]'}`}
+                        >
+                            <div className="flex items-center gap-4">
+                                <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${idx === 0 ? 'bg-electric-cyan/10' : 'bg-white/5'}`}>
+                                    <Dumbbell className={`w-5 h-5 ${idx === 0 ? 'text-electric-cyan' : 'text-zinc-500'}`} />
+                                </div>
+                                <div>
+                                    <p className="text-sm font-bold text-white uppercase tracking-tighter">{w.name}</p>
+                                    <p className="text-[10px] text-muted-foreground uppercase font-bold tracking-tighter">{w.category || "General"}</p>
+                                </div>
+                            </div>
+                            <Link
+                                href={`/train/${w.id}`}
+                                className="px-4 py-2 bg-white text-black text-[10px] font-black rounded-lg uppercase tracking-tight active:scale-95 transition-transform"
+                            >
+                                Start
+                            </Link>
+                        </div>
+                    ))
+                )}
             </div>
 
             {/* Tips / Education */}
