@@ -1,0 +1,144 @@
+[
+    {
+        "name": "exercises",
+        "type": "base",
+        "schema": [
+            {
+                "name": "name",
+                "type": "text",
+                "required": true
+            },
+            {
+                "name": "target_muscle",
+                "type": "text"
+            },
+            {
+                "name": "demo_video",
+                "type": "url"
+            },
+            {
+                "name": "cues",
+                "type": "json"
+            },
+            {
+                "name": "tempo",
+                "type": "text"
+            }
+        ]
+    },
+    {
+        "name": "workouts",
+        "type": "base",
+        "schema": [
+            {
+                "name": "name",
+                "type": "text",
+                "required": true
+            },
+            {
+                "name": "description",
+                "type": "text"
+            },
+            {
+                "name": "exercises",
+                "type": "relation",
+                "options": {
+                    "collectionId": "exercises",
+                    "cascadeDelete": false,
+                    "maxSelect": null
+                }
+            },
+            {
+                "name": "difficulty",
+                "type": "select",
+                "options": {
+                    "values": [
+                        "beginner",
+                        "intermediate",
+                        "advanced"
+                    ]
+                }
+            },
+            {
+                "name": "category",
+                "type": "select",
+                "options": {
+                    "values": [
+                        "push",
+                        "pull",
+                        "legs",
+                        "core",
+                        "fullbody"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "name": "workout_logs",
+        "type": "base",
+        "schema": [
+            {
+                "name": "user",
+                "type": "relation",
+                "options": {
+                    "collectionId": "_pb_users_auth_",
+                    "cascadeDelete": true
+                }
+            },
+            {
+                "name": "workout",
+                "type": "relation",
+                "options": {
+                    "collectionId": "workouts"
+                }
+            },
+            {
+                "name": "session_data",
+                "type": "json"
+            },
+            {
+                "name": "duration_minutes",
+                "type": "number"
+            },
+            {
+                "name": "date",
+                "type": "date"
+            }
+        ]
+    },
+    {
+        "name": "daily_stats",
+        "type": "base",
+        "schema": [
+            {
+                "name": "user",
+                "type": "relation",
+                "options": {
+                    "collectionId": "_pb_users_auth_",
+                    "cascadeDelete": true
+                }
+            },
+            {
+                "name": "date",
+                "type": "date"
+            },
+            {
+                "name": "weight",
+                "type": "number"
+            },
+            {
+                "name": "protein_intake",
+                "type": "number"
+            },
+            {
+                "name": "water_intake",
+                "type": "number"
+            },
+            {
+                "name": "ramadan_noted",
+                "type": "bool"
+            }
+        ]
+    }
+]

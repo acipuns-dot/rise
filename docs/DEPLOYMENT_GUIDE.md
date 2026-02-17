@@ -39,17 +39,22 @@ Vercel will host your **Next.js** application.
 
 ---
 
-## Phase 3: PocketBase Initialization
+### Phase 3: PocketBase Initialization
 
-Once your Railway backend is live at its URL:
+Once your Railway backend is live:
 
 1.  **Admin Setup:** Go to `https://your-railway-url.up.railway.app/_/` and create your admin account.
-2.  **Schema Creation:** 
-    *   Refer to `backend/SCHEMA.md`.
+2.  **Import Schema:**
     *   Go to **Settings (Gear Icon) > Import Collections**.
-    *   You can manually create the `users`, `exercises`, and `daily_logs` collections following the schema rules.
-3.  **Seeding Data:**
-    *   Manually add the exercises from `backend/EXERCISES.json` into the `exercises` collection so the "Foundational Push" routine works.
+    *   Click **Load from JSON** and select `backend/collections.json`.
+    *   Review the changes and click **Import**.
+3.  **Add User Fields:**
+    *   Go to the `users` collection.
+    *   Add these fields manually: `weight` (number), `protein_goal` (number), `water_goal` (number), `ramadan_mode` (bool), `protein_current` (number), `water_current` (number).
+4.  **Seeding Data (Automated):**
+    *   Open your terminal in the project root.
+    *   Run: `set PB_ADMIN_EMAIL=your@email.com && set PB_ADMIN_PASSWORD=yourpassword && node backend/seed.js`
+    *   This will automatically populate your Exercises and Workouts.
 
 ---
 
