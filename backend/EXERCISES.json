@@ -1,0 +1,74 @@
+[
+    {
+        "id": "foundational-push",
+        "name": "Foundational Push",
+        "description": "Building the core pushing strength and chest definition.",
+        "exercises": [
+            {
+                "name": "Incline Push-ups",
+                "target": "Upper Chest & Shoulders",
+                "sets": 3,
+                "reps": "10-12",
+                "tempo": "3-1-1",
+                "cues": [
+                    "Hands on a stable elevated surface (bed/chair)",
+                    "Keep core tight and body in a straight line",
+                    "Lower chest slowly for 3 seconds",
+                    "Pause for 1 second at the bottom",
+                    "Explode up in 1 second"
+                ],
+                "video": "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJndzR4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKMGpxP5O5D6hFe/giphy.gif"
+            },
+            {
+                "name": "Doorway Rows",
+                "target": "Back & Rear Delts",
+                "sets": 3,
+                "reps": "12-15",
+                "tempo": "2-1-1",
+                "cues": [
+                    "Stand facing a doorway, hands on the frame",
+                    "Lean back until arms are straight",
+                    "Pull your chest toward the frame using your back",
+                    "Squeeze shoulder blades for 1 second",
+                    "Control the descent for 2 seconds"
+                ],
+                "video": "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJndzR4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/vWku8YNwyy5FTgop9B/giphy.gif"
+            },
+            {
+                "name": "Pike Push-ups",
+                "target": "Shoulder Cap & Shape",
+                "sets": 3,
+                "reps": "8-10",
+                "tempo": "3-1-1",
+                "cues": [
+                    "Start in a V-shape down-dog position",
+                    "Lower the top of your head toward the floor",
+                    "Look back at your feet to keep neck neutral",
+                    "Push back up to the start position"
+                ],
+                "video": "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJndzR4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKVUn7iM8FMEU24/giphy.gif"
+            }
+        ]
+    },
+    {
+        "id": "lower-body-sculpt",
+        "name": "Lower Body Sculpt",
+        "description": "Toning thighs and building glute foundation.",
+        "exercises": [
+            {
+                "name": "Paused Squats",
+                "target": "Quads & Glutes",
+                "sets": 3,
+                "reps": "15",
+                "tempo": "3-2-1",
+                "cues": [
+                    "Feet shoulder-width apart",
+                    "Sit back like you're sitting in a chair",
+                    "Hold the bottom position for 2 full seconds",
+                    "Drive through heels to stand up"
+                ],
+                "video": "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJndzR4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4NXp4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKMGpxP5O5D6hFe/giphy.gif"
+            }
+        ]
+    }
+]
